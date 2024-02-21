@@ -1,174 +1,8 @@
-class No<T> {
-    private T obj;
-    private No<T> refNo;
-
-    public No(T obj) {
-        this.obj = obj;
-        this.refNo = null;
-    }
-
-    public T getObj() {
-        return obj;
-    }
-
-    public void setObj(T obj) {
-        this.obj = obj;
-    }
-
-    public No<T> getRefNo() {
-        return refNo;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setRefNo(No<?> refAux) {
-        this.refNo = (No<T>) refAux;
-    }
-
-    @Override
-    public String toString() {
-        return "[No{Objeto=" + this.obj + "}]";
-    }
-}
-
-class Pilha {
-    private No<?> refNoEntradaPilha;
-
-    public Pilha() {
-        this.refNoEntradaPilha = null;
-    }
-
-    public boolean isEmpty() {
-        return refNoEntradaPilha == null ? true : false;
-    }
-
-    public No<?> top() {
-        return refNoEntradaPilha;
-    }
-
-    public void push(Object obj) {
-        No<?> novoNo = new No<>(obj);
-        No<?> refAux = refNoEntradaPilha;
-        refNoEntradaPilha = novoNo;
-        refNoEntradaPilha.setRefNo(refAux);
-    }
-
-    public No<?> pop() {
-        if (!isEmpty()) {
-            No<?> noPoped = refNoEntradaPilha;
-            refNoEntradaPilha = refNoEntradaPilha.getRefNo();
-            
-            return noPoped;
-        }
-
-        return null;
-    }
-
-    @Override
-    public String toString() {
-        String s = "------------------\n";
-        s += "Pilha\n";
-        s += "------------------\n";
-
-        No<?> noAux = refNoEntradaPilha;
-
-        while (true) {
-            if (noAux != null) {
-                s += "[No(dado=" + noAux.getObj() + ")]\n";
-                noAux = noAux.getRefNo();
-            } else {
-                break;
-            }
-        }
-
-        s += "==================\n";
-
-        return s;
-    }
-
-
-}
-
-class Fila<T> {
-    private No<T> refNoEntradaFila;
-
-    public Fila() {
-        this.refNoEntradaFila = null;
-    }
-
-    public boolean isEmpty() {
-        return refNoEntradaFila == null ? true : false;
-    }
-
-    public void enqueue(T obj) {
-        No<T> novoNo = new No<T>(obj);
-        novoNo.setRefNo(refNoEntradaFila);
-        refNoEntradaFila = novoNo;
-    }
-
-    public T first() {
-        if (!this.isEmpty()) {
-            No<T> primeiroNo = refNoEntradaFila;
-            while (true) {
-                if (primeiroNo.getRefNo() != null) {
-                    primeiroNo = primeiroNo.getRefNo();
-                } else {
-                    break;
-                }
-            }
-
-            return (T) primeiroNo.getObj();
-        }
-        
-        return null;
-    }
-
-    public T dequeue() {
-        if (!this.isEmpty()) {
-            No<T> primeiroNo = refNoEntradaFila;
-            No<T> noAux = refNoEntradaFila;
-            while (true) {
-                if (primeiroNo.getRefNo() != null) {
-                    noAux = primeiroNo;
-                    primeiroNo = primeiroNo.getRefNo();
-                } else {
-                    noAux.setRefNo(null);
-                    break;
-                }
-            }
-
-            return (T) primeiroNo.getObj();
-        }
-        
-        return null;
-    } 
-
-    @Override
-    public String toString() {
-        String s = "";
-        No<T> noAux = refNoEntradaFila;
-        
-        if (refNoEntradaFila != null) {
-            while (true) {
-                s += "[No{objeto=" + noAux.getObj() + "}]-->";
-                if (noAux.getRefNo() != null) {
-                    noAux = noAux.getRefNo();
-                } else {
-                    s += null;
-                    break;
-                }
-            }
-        } else {
-            s = "null";
-        }
-        
-        return s;
-    }
-}
-
 public class App {
     public static void main(String[] args) throws Exception {
         //pilha();
-        fila();
+        //fila();
+        listaEncadeada();
     }
 
     static void pilha() {
@@ -214,5 +48,22 @@ public class App {
 
         System.out.println(f);
 
+    }
+
+    static void listaEncadeada() {
+        ListaEncadeada<String> l = new ListaEncadeada<>();
+
+        l.add("1");
+        l.add("2");
+        l.add("3");
+        l.add("4");
+
+        System.out.println(l.get(0));
+
+        System.out.println(l);
+
+        l.remove(3);
+
+        System.out.println(l);
     }
 }
