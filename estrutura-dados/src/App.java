@@ -2,7 +2,9 @@ public class App {
     public static void main(String[] args) throws Exception {
         //pilha();
         //fila();
-        listaEncadeada();
+        //listaEncadeada();
+        //listaDuplamenteEncadeada();
+        listaCircular();
     }
 
     static void pilha() {
@@ -65,5 +67,53 @@ public class App {
         l.remove(3);
 
         System.out.println(l);
+    }
+
+    static void listaDuplamenteEncadeada() {
+        ListaDuplamenteEncadeada<String> l = new ListaDuplamenteEncadeada<>();
+
+        l.add("c1");
+        l.add("c2");
+        l.add("c3");
+        l.add("c4");
+        l.add("c5");
+        l.add("c6");
+        l.add("c7");
+
+        System.out.println(l);
+
+        l.remove(3);
+
+        System.out.println(l);
+
+        l.add("c4", 3);
+
+        System.out.println(l);
+
+        System.out.println(l.get(3));
+    }
+
+    static void listaCircular() {
+        ListaCircular<String> l = new ListaCircular<>();
+
+        l.add("c0");
+
+        System.out.println(l);
+
+        l.remove(0);
+
+        System.out.println(l);
+
+        l.add("c1");
+        l.add("c2");
+        l.add("c3");
+
+        System.out.println(l);
+
+        System.out.println(l.get(0));
+        System.out.println(l.get(1));
+        System.out.println(l.get(2));
+        System.out.println(l.get(3));
+        System.err.println(l.get(100));
     }
 }
