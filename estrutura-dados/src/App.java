@@ -1,10 +1,13 @@
+import Modelos.Obj;
+
 public class App {
     public static void main(String[] args) throws Exception {
         //pilha();
         //fila();
         //listaEncadeada();
         //listaDuplamenteEncadeada();
-        listaCircular();
+        //listaCircular();
+        arvoreBinaria();
     }
 
     static void pilha() {
@@ -115,5 +118,29 @@ public class App {
         System.out.println(l.get(2));
         System.out.println(l.get(3));
         System.err.println(l.get(100));
+    }
+
+    static void arvoreBinaria() {
+        ArvoreBinaria<Obj> a = new ArvoreBinaria<>();
+
+        a.inserir(new Obj(13));
+        a.inserir(new Obj(10));
+        a.inserir(new Obj(25));
+        a.inserir(new Obj(2));
+        a.inserir(new Obj(12));
+        a.inserir(new Obj(20));
+        a.inserir(new Obj(31));
+        a.inserir(new Obj(29));
+
+        a.exibirInOrdem();
+        a.exibirPreOrdem();
+        a.exibirPosOrdem();
+
+        a.inserir(new Obj(32));
+
+        a.exibirInOrdem();
+        a.exibirPreOrdem();
+        a.exibirPosOrdem();
+
     }
 }
